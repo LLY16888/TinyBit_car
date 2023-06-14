@@ -489,14 +489,14 @@ namespace Tinybit {
                 PID_err_next_X = PID_err_X;
                 PID_last_result_X = result;
                     //防死区
-                    if (result >0 && result <60)
-                    {
-                        result = 60;
-                    }
-                    else if(result <0 && result >-60)
-                    {
-                        result = -60;
-                    }
+                    // if (result >0 && result <60)
+                    // {
+                    //     result = 60;
+                    // }
+                    // else if(result <0 && result >-60)
+                    // {
+                    //     result = -60;
+                    // }
             break;
 
             case 1:
@@ -510,13 +510,13 @@ namespace Tinybit {
                 PID_err_next_Y = PID_err_Y;
                 PID_last_result_Y = result;
                 //防死区
-                if (result >0 && result <60)
+                if (result >0 && result <55)
                 {
-                    result = 60;
+                    result = 55;
                 }
-                else if(result <0 && result >-60)
+                else if(result <0 && result >-55)
                 {
-                    result = -60;
+                    result = -55;
                 }
             break;
 
@@ -555,8 +555,8 @@ namespace Tinybit {
             return;
         }
         
-        apr_x = x - 80; //80:机器码X中心点
-        apr_y = y - 60; //60：机器码Y中心点
+        apr_x =80 - x; //80:机器码X中心点
+        apr_y =60 -  y ; //60：机器码Y中心点
 
         //PID处理
         res_x = k210_PID_deal(apr_x,0);//进行x的方向PID处理
@@ -568,22 +568,22 @@ namespace Tinybit {
 
 
         //不超过最大速度
-        if(speed_L >150)
+        if(speed_L >100)
         {
-            speed_L = 150
+            speed_L = 100
         }
-        else if(speed_L < -150)
+        else if(speed_L < -100)
         {
-            speed_L = -150
+            speed_L = -100
         }
 
-        if(speed_R >150)
+        if(speed_R >100)
         {
-            speed_R = 150
+            speed_R = 100
         }
-        else if(speed_R < -150)
+        else if(speed_R < -100)
         {
-            speed_R = -150
+            speed_R = -100
         }
 
         //PID处理后再传速度
@@ -593,195 +593,29 @@ namespace Tinybit {
         }
         else if(speed_L < 0 && speed_R > 0)
         {
-            // speed_L = -speed_L; //注释就原地转
+            speed_L = -speed_L; 
             Car_spinleft(speed_L,speed_R);
         }
         else if(speed_L > 0 && speed_R < 0)
         {
-            // speed_R = -speed_R; //注释就原地转
+            speed_R = -speed_R; 
             Car_spinright(speed_L,speed_R);   
             
             
         }
-        else if(speed_L < 0 && speed_R < 0)
+        else 
         {
-            speed_L = -speed_L;
-            speed_R = -speed_R;
-            Car_run(speed_L,speed_R);//不后退，只前进
+            if(speed_L<0)
+            {
+                speed_L = -speed_L;
+            }
+            if(speed_R<0)
+            {
+                speed_R = -speed_R;
+            }
+            Car_run(speed_L,speed_R);//其它情况，只前进
         }
         
-    }
-
-    //% blockId=Tinybit_follow_color block="Follow Color|k210_x %x|k210_y %y|k210_w %w|k210_h %h"
-    //% color="#ff56ff"
-    //% weight=87
-    //% blockGap=10
-    //% x.min=0 x.max=320 y.min=0 y.max=240 w.min=0 w.max=320 h.min=0 h.max=240
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function follow_color(x:number,y:number,w:number,h:number)
-    {
-        let speed_L = 0;
-        let speed_R = 0;
-        let res_x = 0;
-        let res_y = 0;
-        let apr_x = 0;
-        let apr_y = 0;
-
-        //初始化PID,***后面在封成库里面，现在PID先开放，调试用***
-        // if(PID_state == 0)
-        // {
-        //     k210_PID_init_X(0, 0.5, 0, 0.01);//0：左右偏的方向为0，即没误差
-        //     k210_PID_init_Y(75, 0.9, 0, 0.01);//75：默认没误差的前进速度
-        //     PID_state = 1;
-        // }
-
-        //检测不到，小车停止
-        if(w==0 && h==0)
-        {
-            Car_stop();
-            return;
-        }
-
-        apr_x = x - 160; //160:机器码X中心点
-        apr_y = y - 120; //120：机器码Y中心点
-
-        //PID处理
-        res_x = k210_PID_deal(apr_x,0);//进行x的方向PID处理
-        res_y = k210_PID_deal(apr_y,1);//进行y的方向PID处理
-
-        //误差转成速度
-        speed_L = res_y + 0 + res_x;
-        speed_R = res_y - 0 - res_x;
-
-
-        //不超过最大速度
-        if(speed_L >150)
-        {
-            speed_L = 150
-        }
-        else if(speed_L < -150)
-        {
-            speed_L = -150
-        }
-
-        if(speed_R >150)
-        {
-            speed_R = 150
-        }
-        else if(speed_R < -150)
-        {
-            speed_R = -150
-        }
-
-        //PID处理后再传速度
-        if(speed_L >= 0 && speed_R >= 0)
-        {
-            Car_run(speed_L,speed_R);
-        }
-        else if(speed_L < 0 && speed_R > 0)
-        {
-            // speed_L = -speed_L; //注释就原地转
-            Car_spinleft(speed_L,speed_R);
-        }
-        else if(speed_L > 0 && speed_R < 0)
-        {
-            // speed_R = -speed_R; //注释就原地转
-            Car_spinright(speed_L,speed_R);   
-            
-            
-        }
-        else if(speed_L < 0 && speed_R < 0)
-        {
-            speed_L = -speed_L;
-            speed_R = -speed_R;
-            Car_run(speed_L,speed_R);//不后退，只前进
-        }
-
-
-    }
-    
-    
-    //% blockId=Tinybit_color_line block="Color Line|speed %speedLine|k210_x %x|k210_y %y|k210_w %w|k210_h %h"
-    //% color="#ffaa56"
-    //% weight=87
-    //% blockGap=10
-    //% speedLine.min=60 speedLine.max=255 x.min=0 x.max=320 y.min=0 y.max=240 w.min=0 w.max=320 h.min=0 h.max=240
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function color_line(speedLine:number,x:number,y:number,w:number,h:number)
-    {
-        let speed_L = 0;
-        let speed_R = 0;
-        let res_x = 0;
-        let apr_x = 0;
-
-        //初始化PID,***后面在封成库里面，现在PID先开放，调试用***
-        // if(PID_state == 0)
-        // {
-        //     k210_PID_init_X(0, 0.5, 0, 0.01);//0：左右偏的方向为0，即没误差
-        //     PID_state = 1;
-        // }
-
-        //检测不到，小车停止
-        if(w==0 && h==0)
-        {
-            Car_stop();
-            return;
-        }
-
-        apr_x = x - 160; //160:机器码X中心点
-
-        //PID处理
-        res_x = k210_PID_deal(apr_x,0);//进行x的方向PID处理
-
-        //误差转成速度
-        // speed_L = res_y + 0 + res_x;
-        // speed_R = res_y - 0 - res_x;
-        speed_L = speedLine + 0 + res_x
-
-
-        //不超过最大速度
-        if(speed_L >255)
-        {
-            speed_L = 255
-        }
-        else if(speed_L < -255)
-        {
-            speed_L = -255
-        }
-
-        if(speed_R >255)
-        {
-            speed_R = 255
-        }
-        else if(speed_R < -255)
-        {
-            speed_R = -255
-        }
-
-        //PID处理后再传速度
-        if(speed_L >= 0 && speed_R >= 0)
-        {
-            Car_run(speed_L,speed_R);
-        }
-        else if(speed_L < 0 && speed_R > 0)
-        {
-            //speed_L = -speed_L; //注释就原地转
-            Car_spinleft(speed_L,speed_R);
-        }
-        else if(speed_L > 0 && speed_R < 0)
-        {
-            //speed_R = -speed_R; //注释就原地转
-            Car_spinright(speed_L,speed_R);   
-            
-            
-        }
-        else if(speed_L < 0 && speed_R < 0)
-        {
-            speed_L = -speed_L;
-            speed_R = -speed_R;
-            Car_run(speed_L,speed_R);//不后退，只前进
-        }
-
     }
 
 }
