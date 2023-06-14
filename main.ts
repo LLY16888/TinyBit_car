@@ -423,6 +423,7 @@ namespace Tinybit {
     }
 
     let PID_state = 0;//状态 1：初始化PID
+    let frist_flag = 0 //第一包数据标志
 
     //X方向的
     let PID_P_X = 0;
@@ -556,6 +557,7 @@ namespace Tinybit {
         return result;
     }
 
+    
     //% blockId=Tinybit_follow_apriltags block="Follow Apriltags|k210_x %x|k210_y %y|k210_w %w|k210_h %h"
     //% color="#006400"
     //% weight=87
@@ -583,10 +585,20 @@ namespace Tinybit {
         if(w==0 && h==0)
         {
             Car_stop();
+            frist_flag = 0;
             return;
         }
+
+        if (frist_flag = 0)//停止后再运行第一包数据不要
+        {
+            frist_flag = 1;
+            return;
+        }
+
         
-        apr_x =x - 80; //80:机器码X中心点
+        
+
+        apr_x =80 - x; //80:机器码X中心点
         apr_y =y - 60; //60：机器码Y中心点
 
         //PID处理
