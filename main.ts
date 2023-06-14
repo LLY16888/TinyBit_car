@@ -589,7 +589,7 @@ namespace Tinybit {
             return;
         }
 
-        if (frist_flag < 8)//停止后再检测到，前8包数据不要
+        if (frist_flag < 6)//停止后再检测到，前5包数据不要
         {
             frist_flag = frist_flag + 1;
             return;
@@ -605,7 +605,6 @@ namespace Tinybit {
         res_x = k210_PID_deal(apr_x,0);//进行x的方向PID处理
         res_y = k210_PID_deal(apr_y,1);//进行y的方向PID处理
 
-        basic.showNumber(apr_x)
         //误差转成速度
         speed_L = res_y + 0 + res_x;
         speed_R = res_y - 0 - res_x;
