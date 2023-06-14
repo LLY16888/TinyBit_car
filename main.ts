@@ -464,11 +464,13 @@ namespace Tinybit {
         {
             buf[3] = 0;
             buf[4] = -sp_R;
+            basic.showNumber(sp_R);
         }
         else //正转
         {
             buf[3] = sp_R;
             buf[4] = 0;
+            basic.showNumber(sp_R);
         }
 
         pins.i2cWriteBuffer(PWM_ADD, buf);
@@ -618,8 +620,8 @@ namespace Tinybit {
         }
 
         //PID处理后再传速度
-        //car_sport(speed_L,speed_R);
-        car_sport(80,-80);
+        // car_sport(speed_L,speed_R);
+        car_sport(speed_L,-80);
         
     }
 
