@@ -586,13 +586,14 @@ namespace Tinybit {
             return;
         }
         
-        apr_x =80 - x; //80:机器码X中心点
-        apr_y =60 -  y ; //60：机器码Y中心点
+        apr_x =x - 80; //80:机器码X中心点
+        apr_y =y - 60; //60：机器码Y中心点
 
         //PID处理
         res_x = k210_PID_deal(apr_x,0);//进行x的方向PID处理
         res_y = k210_PID_deal(apr_y,1);//进行y的方向PID处理
 
+        basic.showNumber(apr_x)
         //误差转成速度
         speed_L = res_y + 0 + res_x;
         speed_R = res_y - 0 - res_x;
