@@ -444,6 +444,37 @@ namespace Tinybit {
     let PID_target_Y = 0;
     let PID_last_result_Y = 0;
 
+    function car_sport(sp_L:number,sp_R:number)
+    {
+        let buf = pins.createBuffer(5);
+        buf[0] = MOTOR;
+
+        if (sp_L < 0)//反转
+        {
+            buf[1] = 0;
+            buf[2] = - sp_L;
+        }
+        else //正转
+        {
+            buf[1] = sp_L;
+            buf[2] = 0;
+        }
+
+        if (sp_R < 0)//反转
+        {
+            buf[1] = 0;
+            buf[2] = - sp_R;
+        }
+        else //正转
+        {
+            buf[1] = sp_R;
+            buf[2] = 0;
+        }
+
+        pins.i2cWriteBuffer(PWM_ADD, buf);
+
+    }
+
 
     //% blockId=X_PID block="x_PID|target %target|X_P %P|X_I %I|X_D %D"
     //% color="#36648B"
@@ -587,28 +618,7 @@ namespace Tinybit {
         }
 
         //PID处理后再传速度
-        if(speed_L >= 0 && speed_R >= 0)
-        {
-            Car_run(speed_L,speed_R);
-        }
-        if(speed_L < 0 && speed_R >= 0)
-        {
-            speed_L = -speed_L; 
-            Car_spinleft(speed_L,speed_R);
-        }
-        if(speed_L >= 0 && speed_R < 0)
-        {
-            speed_R = -speed_R; 
-            Car_spinright(speed_L,speed_R);   
-           
-        }
-        if(speed_L<0 && speed_R<0)
-        {
-            Car_stop();
-            // speed_L = -speed_L;
-            // speed_R = -speed_R;
-            // Car_run(speed_L,speed_R);//其它情况，只前进
-        }
+        car_sport(speed_L,speed_R);
         
     }
 
