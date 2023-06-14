@@ -618,7 +618,8 @@ namespace Tinybit {
         }
 
         //PID处理后再传速度
-        car_sport(speed_L,speed_R);
+        //car_sport(speed_L,speed_R);
+        car_sport(80,-80);
         
     }
 
