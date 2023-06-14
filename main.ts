@@ -591,29 +591,23 @@ namespace Tinybit {
         {
             Car_run(speed_L,speed_R);
         }
-        else if(speed_L < 0 && speed_R > 0)
+        if(speed_L < 0 && speed_R >= 0)
         {
             speed_L = -speed_L; 
             Car_spinleft(speed_L,speed_R);
         }
-        else if(speed_L > 0 && speed_R < 0)
+        if(speed_L >= 0 && speed_R < 0)
         {
             speed_R = -speed_R; 
             Car_spinright(speed_L,speed_R);   
-            
-            
+           
         }
-        else 
+        if(speed_L<0 && speed_R<0)
         {
-            if(speed_L<0)
-            {
-                speed_L = -speed_L;
-            }
-            if(speed_R<0)
-            {
-                speed_R = -speed_R;
-            }
-            Car_run(speed_L,speed_R);//其它情况，只前进
+            Car_stop();
+            // speed_L = -speed_L;
+            // speed_R = -speed_R;
+            // Car_run(speed_L,speed_R);//其它情况，只前进
         }
         
     }
