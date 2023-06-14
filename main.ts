@@ -423,7 +423,7 @@ namespace Tinybit {
     }
 
     let PID_state = 0;//状态 1：初始化PID
-    let frist_flag = 0 //第一包数据标志
+    let frist_flag = 0 //数据标志
 
     //X方向的
     let PID_P_X = 0;
@@ -589,9 +589,9 @@ namespace Tinybit {
             return;
         }
 
-        if (frist_flag = 0)//停止后再运行第一包数据不要
+        if (frist_flag < 8)//停止后再检测到，前8包数据不要
         {
-            frist_flag = 1;
+            frist_flag = frist_flag + 1;
             return;
         }
 
