@@ -452,7 +452,7 @@ namespace Tinybit {
         if (sp_L < 0)//反转
         {
             buf[1] = 0;
-            buf[2] = - sp_L;
+            buf[2] = -sp_L;
         }
         else //正转
         {
@@ -462,13 +462,13 @@ namespace Tinybit {
 
         if (sp_R < 0)//反转
         {
-            buf[1] = 0;
-            buf[2] = - sp_R;
+            buf[3] = 0;
+            buf[4] = -sp_R;
         }
         else //正转
         {
-            buf[1] = sp_R;
-            buf[2] = 0;
+            buf[3] = sp_R;
+            buf[4] = 0;
         }
 
         pins.i2cWriteBuffer(PWM_ADD, buf);
