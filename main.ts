@@ -453,11 +453,13 @@ namespace Tinybit {
         {
             buf[1] = 0;
             buf[2] = -sp_L;
+            basic.showNumber(sp_R);
         }
         else //正转
         {
             buf[1] = sp_L;
             buf[2] = 0;
+            basic.showNumber(sp_R);
         }
 
         if (sp_R < 0)//反转
