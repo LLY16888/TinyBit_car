@@ -36,7 +36,9 @@
 
   "Tinybit.k210_PID_init_X|block":"x方向的PID|目标速度(一般为0) %target|PX %P|IX %I|DX %D",
   "Tinybit.k210_PID_init_Y|block":"y方向的PID|前进速度 %target|PY %P|IY %I|DY %D",
-  "Tinybit.follow_apriltags|block":"机器码跟随|横坐标 %x|纵坐标 %y|宽度 %w|高度 %h"
+  "Tinybit.follow_apriltags|block":"机器码跟随|横坐标 %x|纵坐标 %y|宽度 %w|高度 %h",
+  "Tinybit.follow_color|block":"颜色跟随|横坐标 %x|纵坐标 %y|宽度 %w|高度 %h",
+  "Tinybit.color_line|block":"颜色巡线|巡线速度 %speedLine|横坐标 %x|纵坐标 %y|宽度 %w|高度 %h"
  
 
 }
