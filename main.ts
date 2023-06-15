@@ -585,15 +585,21 @@ namespace Tinybit {
         if(w==0 && h==0)
         {
             Car_stop();
-            frist_flag = 0;
+            //frist_flag = 0;
             return;
         }
 
-        if (frist_flag < 6)//停止后再检测到，前5包数据不要
+        if(x==0 || y==0)//不可能出现这个值
         {
-            frist_flag = frist_flag + 1;
+            //frist_flag = 0;
             return;
         }
+
+        // if (frist_flag < 6)//停止后再检测到，前5包数据不要
+        // {
+        //     frist_flag = frist_flag + 1;
+        //     return;
+        // }
 
         
         
