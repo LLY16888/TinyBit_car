@@ -635,7 +635,7 @@ namespace Tinybit {
 
 
     //% blockId=Tinybit_follow_color block="Follow Color|k210_x %x|k210_y %y|k210_w %w|k210_h %h"
-    //% color="#00ffff"
+    //% color="#D15FEE"
     //% weight=87
     //% blockGap=10
     //% x.min=0 x.max=320 y.min=0 y.max=240 w.min=0 w.max=320 h.min=0 h.max=240
@@ -711,7 +711,7 @@ namespace Tinybit {
     }
 
     //% blockId=Tinybit_color_line block="Color Line|speedLine %speedLine|k210_x %x|k210_y %y|k210_w %w|k210_h %h"
-    //% color="#FFE1FF"
+    //% color="#EE7AE9"
     //% weight=87
     //% blockGap=10
     //% speedLine.min=55 speedLine.max=200 x.min=0 x.max=320 y.min=0 y.max=240 w.min=0 w.max=320 h.min=0 h.max=240
