@@ -609,24 +609,6 @@ namespace Tinybit {
         speed_L = res_y + 0 + res_x;
         speed_R = res_y - 0 - res_x;
 
-        //反死区
-        if(speed_L >0 && speed_L <55)
-        {
-            speed_L = 55;
-        }
-        else if(speed_L <0 && speed_L > -55)
-        {
-            speed_L = -55;
-        }
-        if(speed_R >0 && speed_R <55)
-        {
-            speed_R = 55;
-        }
-        else if(speed_R <0 && speed_R > -55)
-        {
-            speed_R = -55;
-        }
-
         //不超过最大速度
         if(speed_L >100)
         {
