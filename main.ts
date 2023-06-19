@@ -540,15 +540,15 @@ namespace Tinybit {
                 PID_err_last_Y = PID_err_next_Y;
                 PID_err_next_Y = PID_err_Y;
                 PID_last_result_Y = result;
-                //防死区
-                if (result >0 && result <55)
-                {
-                    result = 55;
-                }
-                else if(result <0 && result >-55)
-                {
-                    result = -55;
-                }
+                // //防死区
+                // if (result >0 && result <55)
+                // {
+                //     result = 55;
+                // }
+                // else if(result <0 && result >-55)
+                // {
+                //     result = -55;
+                // }
             break;
 
             default : result = 0;
