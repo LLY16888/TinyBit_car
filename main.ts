@@ -540,15 +540,15 @@ namespace Tinybit {
                 PID_err_last_Y = PID_err_next_Y;
                 PID_err_next_Y = PID_err_Y;
                 PID_last_result_Y = result;
-                //防死区
-                if (result >0 && result <55)
-                {
-                    result = 55;
-                }
-                else if(result <0 && result >-55)
-                {
-                    result = -55;
-                }
+                // //防死区
+                // if (result >0 && result <55)
+                // {
+                //     result = 55;
+                // }
+                // else if(result <0 && result >-55)
+                // {
+                //     result = -55;
+                // }
             break;
 
             default : result = 0;
@@ -609,6 +609,23 @@ namespace Tinybit {
         speed_L = res_y + 0 + res_x;
         speed_R = res_y - 0 - res_x;
 
+        //反死区
+        if(speed_L >0 && speed_L <55)
+        {
+            speed_L = 55;
+        }
+        else if(speed_L <0 && speed_L > -55)
+        {
+            speed_L = -55;
+        }
+        if(speed_R >0 && speed_R <55)
+        {
+            speed_R = 55;
+        }
+        else if(speed_R <0 && speed_R > -55)
+        {
+            speed_R = -55;
+        }
 
         //不超过最大速度
         if(speed_L >100)
