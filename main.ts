@@ -673,6 +673,21 @@ namespace Tinybit {
         //     PID_state = 1;
         // }
 
+        
+
+        if(x==0 || y==0)//不可能出现这个值
+        {
+            //frist_flag = 0;
+            return;
+        }
+
+        apr_x =160 - x; //80:机器码X中心点
+        apr_y =y - 120; //60：机器码Y中心点
+
+        //PID处理
+        res_x = k210_PID_deal(apr_x,0);//进行x的方向PID处理
+        res_y = k210_PID_deal(apr_y,1);//进行y的方向PID处理
+
         //检测不到，小车停止
         if(w==0 && h==0)
         {
@@ -681,22 +696,8 @@ namespace Tinybit {
             return;
         }
 
-        if(x==0 || y==0)//不可能出现这个值
-        {
-            //frist_flag = 0;
-            return;
-        }
-
-
-        
-        
-
-        apr_x =160 - x; //80:机器码X中心点
-        apr_y =y - 120; //60：机器码Y中心点
-
-        //PID处理
-        res_x = k210_PID_deal(apr_x,0);//进行x的方向PID处理
-        res_y = k210_PID_deal(apr_y,1);//进行y的方向PID处理
+        res_x = res_x/2;
+        res_y = res_x/2;
 
         //误差转成速度
         speed_L = res_y + 0 + res_x;
@@ -765,13 +766,6 @@ namespace Tinybit {
         //     PID_state = 1;
         // }
 
-        //检测不到，小车停止
-        if(w==0 && h==0)
-        {
-            Car_stop();
-            return;
-        }
-
         if(x==0 || y==0)//不可能出现这个值
         {
             //frist_flag = 0;
@@ -782,6 +776,13 @@ namespace Tinybit {
 
         //PID处理
         res_x = k210_PID_deal(apr_x,0);//进行x的方向PID处理
+
+        //检测不到，小车停止
+        if(w==0 && h==0)
+        {
+            Car_stop();
+            return;
+        }
 
         //误差转成速度
         speed_L = speedLine + 0 + res_x;
