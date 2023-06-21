@@ -617,11 +617,11 @@ namespace Tinybit {
             speed_L = -42;
         }
         
-        if(speed_R >20 && speed_R <40)
+        if(speed_R >15 && speed_R <40)
         {
             speed_R = 42;
         }
-        else if(speed_R <-20 && speed_R > -40)
+        else if(speed_R <-15 && speed_R > -40)
         {
             speed_R = -42;
         }
