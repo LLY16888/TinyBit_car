@@ -588,13 +588,6 @@ namespace Tinybit {
             return;
         }
 
-        apr_x =80 - x; //80:机器码X中心点
-        apr_y =y - 60; //60：机器码Y中心点
-
-        //PID处理
-        res_x = k210_PID_deal(apr_x,0);//进行x的方向PID处理
-        res_y = k210_PID_deal(apr_y,1);//进行y的方向PID处理
-
         //检测不到，小车停止
         if(w==0 && h==0)
         {
@@ -602,6 +595,13 @@ namespace Tinybit {
             //frist_flag = 0;
             return;
         }
+
+        apr_x =80 - x; //80:机器码X中心点
+        apr_y =y - 60; //60：机器码Y中心点
+
+        //PID处理
+        res_x = k210_PID_deal(apr_x,0);//进行x的方向PID处理
+        res_y = k210_PID_deal(apr_y,1);//进行y的方向PID处理
 
         //误差转成速度
         speed_L = res_y + 0 + res_x;
@@ -625,7 +625,7 @@ namespace Tinybit {
         {
             speed_R = -50;
         }
-        
+
         
         //不超过最大速度
         if(speed_L >100)
