@@ -603,30 +603,28 @@ namespace Tinybit {
         res_x = k210_PID_deal(apr_x,0);//进行x的方向PID处理
         res_y = k210_PID_deal(apr_y,1);//进行y的方向PID处理
 
-        //防死区
-        if(res_x >0 && res_x <25)
-        {
-            res_x = 25;
-        }
-        else if(res_x <0 && res_x > -25)
-        {
-            res_x = -25;
-        }
-        
-        if(res_y >0 && res_y <25)
-        {
-            res_y = 25;
-        }
-        else if(res_y <0 && res_y > -25)
-        {
-            res_y = -25;
-        }
-
         //误差转成速度
         speed_L = res_y + 0 + res_x;
         speed_R = res_y - 0 - res_x;
 
+        //防死区
+        // if(speed_L >0 && speed_L <50)
+        // {
+        //     speed_L = 50;
+        // }
+        // else if(speed_L <0 && speed_L > -50)
+        // {
+        //     speed_L = -50;
+        // }
         
+        // if(speed_R >0 && speed_R <50)
+        // {
+        //     speed_R = 50;
+        // }
+        // else if(speed_R <0 && speed_R > -50)
+        // {
+        //     speed_R = -50;
+        // }
 
         
         //不超过最大速度
