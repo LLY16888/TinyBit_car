@@ -561,7 +561,7 @@ namespace Tinybit {
     //% color="#006400"
     //% weight=87
     //% blockGap=10
-    //% x.min=0 x.max=320 y.min=0 y.max=240 w.min=0 w.max=320 h.min=0 h.max=240 speed_min.min = 40 speed_min.max = 60
+    //% x.min=0 x.max=320 y.min=0 y.max=240 w.min=0 w.max=320 h.min=0 h.max=240 speed_min.min = 40 speed_min.max = 70
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function follow_apriltags(x:number,y:number,w:number,h:number,speed_min:number)
     {
@@ -655,9 +655,9 @@ namespace Tinybit {
     //% color="#D15FEE"
     //% weight=87
     //% blockGap=10
-    //% x.min=0 x.max=320 y.min=0 y.max=240 w.min=0 w.max=320 h.min=0 h.max=240
+    //% x.min=0 x.max=320 y.min=0 y.max=240 w.min=0 w.max=320 h.min=0 h.max=240 speed_min.min=40 speed_min.min=70
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function follow_color(x:number,y:number,w:number,h:number)
+    export function follow_color(x:number,y:number,w:number,h:number,speed_min:number)
     {
         let speed_L = 0;
         let speed_R = 0;
@@ -698,29 +698,29 @@ namespace Tinybit {
         }
 
         res_x = res_x/2;
-        res_y = res_x/2;
+        res_y = res_y/2;
 
         //误差转成速度
         speed_L = res_y + 0 + res_x;
         speed_R = res_y - 0 - res_x;
 
         //防死区
-        if(speed_L >0 && speed_L <50)
+        if(speed_L >0 && speed_L <speed_min)
         {
-            speed_L = 50;
+            speed_L = speed_min;
         }
-        else if(speed_L <0 && speed_L > -50)
+        else if(speed_L <0 && speed_L > -speed_min)
         {
-            speed_L = -50;
+            speed_L = -speed_min;
         }
         
-        if(speed_R >0 && speed_R <50)
+        if(speed_R >0 && speed_R <speed_min)
         {
-            speed_R = 50;
+            speed_R = speed_min;
         }
-        else if(speed_R <0 && speed_R > -50)
+        else if(speed_R <0 && speed_R > -speed_min)
         {
-            speed_R = -50;
+            speed_R = -speed_min;
         }
 
 
