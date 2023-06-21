@@ -651,7 +651,7 @@ namespace Tinybit {
     }
 
 
-    //% blockId=Tinybit_follow_color block="Follow Color|k210_x %x|k210_y %y|k210_w %w|k210_h %h"
+    //% blockId=Tinybit_follow_color block="Follow Color|k210_x %x|k210_y %y|k210_w %w|k210_h %h|k210_speed %speed_min"
     //% color="#D15FEE"
     //% weight=87
     //% blockGap=10
