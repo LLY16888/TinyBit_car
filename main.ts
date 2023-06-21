@@ -607,7 +607,7 @@ namespace Tinybit {
         speed_L = res_y + 0 + res_x;
         speed_R = res_y - 0 - res_x;
 
-        //防死区
+        // 防死区
         // if(speed_L >0 && speed_L <50)
         // {
         //     speed_L = 50;
