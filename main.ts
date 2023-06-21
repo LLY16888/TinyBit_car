@@ -608,42 +608,42 @@ namespace Tinybit {
         speed_R = res_y - 0 - res_x;
 
         // 防死区
-        if(speed_L >20 && speed_L <50)
+        if(speed_L >15 && speed_L <40)
         {
-            speed_L = 50;
+            speed_L = 42;
         }
-        else if(speed_L <-20 && speed_L > -50)
+        else if(speed_L <-15 && speed_L > -40)
         {
-            speed_L = -50;
+            speed_L = -42;
         }
         
-        if(speed_R >20 && speed_R <50)
+        if(speed_R >20 && speed_R <40)
         {
-            speed_R = 50;
+            speed_R = 42;
         }
-        else if(speed_R <-20 && speed_R > -50)
+        else if(speed_R <-20 && speed_R > -40)
         {
-            speed_R = -50;
+            speed_R = -42;
         }
 
         
         //不超过最大速度
-        if(speed_L >100)
+        if(speed_L >80)
         {
-            speed_L = 100
+            speed_L = 80
         }
-        else if(speed_L < -100)
+        else if(speed_L < -80)
         {
-            speed_L = -100
+            speed_L = -80
         }
 
-        if(speed_R >100)
+        if(speed_R >80)
         {
-            speed_R = 100
+            speed_R = 80
         }
-        else if(speed_R < -100)
+        else if(speed_R < -80)
         {
-            speed_R = -100
+            speed_R = -80
         }
 
         //PID处理后再传速度
