@@ -557,13 +557,13 @@ namespace Tinybit {
     }
 
     
-    //% blockId=Tinybit_follow_apriltags block="Follow Apriltags|k210_x %x|k210_y %y|k210_w %w|k210_h %h"
+    //% blockId=Tinybit_follow_apriltags block="Follow Apriltags|k210_x %x|k210_y %y|k210_w %w|k210_h %h|k210_speed %speed_min"
     //% color="#006400"
     //% weight=87
     //% blockGap=10
-    //% x.min=0 x.max=320 y.min=0 y.max=240 w.min=0 w.max=320 h.min=0 h.max=240
+    //% x.min=0 x.max=320 y.min=0 y.max=240 w.min=0 w.max=320 h.min=0 h.max=240 speed_min.min = 40 speed_min.max = 60
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function follow_apriltags(x:number,y:number,w:number,h:number)
+    export function follow_apriltags(x:number,y:number,w:number,h:number,speed_min:number)
     {
         let speed_L = 0;
         let speed_R = 0;
@@ -610,20 +610,20 @@ namespace Tinybit {
         // 防死区
         if(speed_L >15 && speed_L <42)
         {
-            speed_L = 43;
+            speed_L = speed_min;
         }
         else if(speed_L <-15 && speed_L > -42)
         {
-            speed_L = -43;
+            speed_L = -speed_min;
         }
         
         if(speed_R >15 && speed_R <42)
         {
-            speed_R = 43;
+            speed_R = speed_min;
         }
         else if(speed_R <-15 && speed_R > -42)
         {
-            speed_R = -43;
+            speed_R = -speed_min;
         }
 
         
