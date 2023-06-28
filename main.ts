@@ -561,7 +561,7 @@ namespace Tinybit {
     //% color="#006400"
     //% weight=87
     //% blockGap=10
-    //% x.min=0 x.max=320 y.min=0 y.max=240 w.min=0 w.max=320 h.min=0 h.max=240 speed_min.min = 40 speed_min.max = 70
+    //% x.min=0 x.max=320 y.min=0 y.max=240 w.min=0 w.max=320 h.min=0 h.max=240 speed_min.min = 10 speed_min.max = 70
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function follow_apriltags(x:number,y:number,w:number,h:number,speed_min:number)
     {
@@ -599,6 +599,8 @@ namespace Tinybit {
         apr_x =80 - x; //80:机器码X中心点
         apr_y =y - 60; //60：机器码Y中心点
 
+        //if apr_x =+-20 apr_y = +-20 return 
+
         //PID处理
         res_x = k210_PID_deal(apr_x,0);//进行x的方向PID处理
         res_y = k210_PID_deal(apr_y,1);//进行y的方向PID处理
@@ -628,22 +630,22 @@ namespace Tinybit {
 
         
         //不超过最大速度
-        if(speed_L >80)
+        if(speed_L >50)
         {
-            speed_L = 80
+            speed_L = 50
         }
-        else if(speed_L < -80)
+        else if(speed_L < -50)
         {
-            speed_L = -80
+            speed_L = -50
         }
 
-        if(speed_R >80)
+        if(speed_R >50)
         {
-            speed_R = 80
+            speed_R = 50
         }
-        else if(speed_R < -80)
+        else if(speed_R < -50)
         {
-            speed_R = -80
+            speed_R = -50
         }
 
         //PID处理后再传速度
@@ -655,7 +657,7 @@ namespace Tinybit {
     //% color="#D15FEE"
     //% weight=87
     //% blockGap=10
-    //% x.min=0 x.max=320 y.min=0 y.max=240 w.min=0 w.max=320 h.min=0 h.max=240 speed_min.min=40 speed_min.min=70
+    //% x.min=0 x.max=320 y.min=0 y.max=240 w.min=0 w.max=320 h.min=0 h.max=240 speed_min.min=10 speed_min.min=70
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function follow_color(x:number,y:number,w:number,h:number,speed_min:number)
     {
@@ -751,7 +753,7 @@ namespace Tinybit {
     //% color="#EE7AE9"
     //% weight=87
     //% blockGap=10
-    //% speedLine.min=55 speedLine.max=200 x.min=0 x.max=320 y.min=0 y.max=240 w.min=0 w.max=320 h.min=0 h.max=240
+    //% speedLine.min=10 speedLine.max=200 x.min=0 x.max=320 y.min=0 y.max=240 w.min=0 w.max=320 h.min=0 h.max=240
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function color_line(speedLine:number,x:number,y:number,w:number,h:number)
     {
@@ -763,7 +765,6 @@ namespace Tinybit {
         // if(PID_state == 0)
         // {
         //     k210_PID_init_X(0, 0.5, 0, 0.01);//0：左右偏的方向为0，即没误差
-        //     k210_PID_init_Y(75, 0.9, 0, 0.01);//75：默认没误差的前进速度
         //     PID_state = 1;
         // }
 
