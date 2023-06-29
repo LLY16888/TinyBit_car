@@ -629,24 +629,24 @@ namespace Tinybit {
         }
 
         
-        //不超过最大速度
-        if(speed_L >50)
-        {
-            speed_L = 50
-        }
-        else if(speed_L < -50)
-        {
-            speed_L = -50
-        }
+        // //不超过最大速度
+        // if(speed_L >50)
+        // {
+        //     speed_L = 50
+        // }
+        // else if(speed_L < -50)
+        // {
+        //     speed_L = -50
+        // }
 
-        if(speed_R >50)
-        {
-            speed_R = 50
-        }
-        else if(speed_R < -50)
-        {
-            speed_R = -50
-        }
+        // if(speed_R >50)
+        // {
+        //     speed_R = 50
+        // }
+        // else if(speed_R < -50)
+        // {
+        //     speed_R = -50
+        // }
 
         //PID处理后再传速度
         car_sport(speed_L,speed_R);
