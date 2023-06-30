@@ -630,23 +630,23 @@ namespace Tinybit {
 
         
         // //不超过最大速度
-        // if(speed_L >50)
-        // {
-        //     speed_L = 50
-        // }
-        // else if(speed_L < -50)
-        // {
-        //     speed_L = -50
-        // }
+        if(speed_L >65)
+        {
+            speed_L = 65
+        }
+        else if(speed_L < -65)
+        {
+            speed_L = -65
+        }
 
-        // if(speed_R >50)
-        // {
-        //     speed_R = 50
-        // }
-        // else if(speed_R < -50)
-        // {
-        //     speed_R = -50
-        // }
+        if(speed_R >65)
+        {
+            speed_R = 65
+        }
+        else if(speed_R < -65)
+        {
+            speed_R = -65
+        }
 
         //PID处理后再传速度
         car_sport(speed_L,speed_R);
@@ -684,8 +684,8 @@ namespace Tinybit {
             return;
         }
 
-        apr_x =160 - x; //80:机器码X中心点
-        apr_y =y - 120; //60：机器码Y中心点
+        apr_x =160 - x; 
+        apr_y =y - 120; 
 
         //PID处理
         res_x = k210_PID_deal(apr_x,0);//进行x的方向PID处理
@@ -774,17 +774,17 @@ namespace Tinybit {
             return;
         }
 
-        apr_x =160 - x; //80:机器码X中心点
+        //检测不到，保留上一个状态
+        if(w==0 && h==0)
+        {
+            // Car_stop();
+            return;
+        }
+
+        apr_x =160 - x; 
 
         //PID处理
         res_x = k210_PID_deal(apr_x,0);//进行x的方向PID处理
-
-        //检测不到，小车停止
-        if(w==0 && h==0)
-        {
-            Car_stop();
-            return;
-        }
 
         //误差转成速度
         speed_L = speedLine + 0 + res_x;
