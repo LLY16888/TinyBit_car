@@ -599,7 +599,11 @@ namespace Tinybit {
         apr_x =80 - x; //80:机器码X中心点
         apr_y =y - 60; //60：机器码Y中心点
 
-        //if apr_x =+-20 apr_y = +-20 return 
+        if((apr_x<20||apr_x>-20)&&(apr_y<20||apr_y>-20))
+        {
+            Car_stop();
+            return 
+        }
 
         //PID处理
         res_x = k210_PID_deal(apr_x,0);//进行x的方向PID处理
@@ -630,22 +634,22 @@ namespace Tinybit {
 
         
         // //不超过最大速度
-        if(speed_L >55)
+        if(speed_L >65)
         {
-            speed_L = 55
+            speed_L = 65
         }
-        else if(speed_L < -55)
+        else if(speed_L < -65)
         {
-            speed_L = -55
+            speed_L = -65
         }
 
-        if(speed_R >55)
+        if(speed_R >65)
         {
-            speed_R = 55
+            speed_R = 65
         }
-        else if(speed_R < -55)
+        else if(speed_R < -65)
         {
-            speed_R = -55
+            speed_R = -65
         }
 
         //PID处理后再传速度
