@@ -557,13 +557,13 @@ namespace Tinybit {
     }
 
     
-    //% blockId=Tinybit_follow_apriltags block="Follow Apriltags|k210_x %x|k210_y %y|k210_w %w|k210_h %h|k210_speed %speed_min"
+    //% blockId=Tinybit_follow_apriltags block="Follow Apriltags|k210_x %x|k210_y %y|k210_w %w|k210_h %h|k210_speed %speed_min|zhong %zhong"
     //% color="#006400"
     //% weight=87
     //% blockGap=10
-    //% x.min=0 x.max=320 y.min=0 y.max=240 w.min=0 w.max=320 h.min=0 h.max=240 speed_min.min = 10 speed_min.max = 70
+    //% x.min=0 x.max=320 y.min=0 y.max=240 w.min=0 w.max=320 h.min=0 h.max=240 speed_min.min = 10 speed_min.max = 70 zhong.min = 0 zhong.min = 40
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function follow_apriltags(x:number,y:number,w:number,h:number,speed_min:number)
+    export function follow_apriltags(x:number,y:number,w:number,h:number,speed_min:number,zhong:number)
     {
         let speed_L = 0;
         let speed_R = 0;
@@ -599,7 +599,7 @@ namespace Tinybit {
         apr_x =80 - x; //80:机器码X中心点
         apr_y =y - 60; //60：机器码Y中心点
 
-        if((apr_x<10&&apr_x>-10)&&(apr_y<10&&apr_y>-10))
+        if((apr_x<zhong&&apr_x>-zhong)&&(apr_y<zhong&&apr_y>-zhong))
         {
             Car_stop();
             //basic.showNumber(apr_x);
