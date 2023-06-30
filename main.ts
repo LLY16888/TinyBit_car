@@ -580,18 +580,17 @@ namespace Tinybit {
         //     PID_state = 1;
         // }
 
-        
 
-        if(x==0 || y==0)//不可能出现这个值
+        //检测不到，小车停止
+        if(w==0 || h==0)
         {
+            Car_stop();
             //frist_flag = 0;
             return;
         }
 
-        //检测不到，小车停止
-        if(w==0 && h==0)
+        if(x==0 || y==0)//不可能出现这个值
         {
-            Car_stop();
             //frist_flag = 0;
             return;
         }
