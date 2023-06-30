@@ -602,7 +602,7 @@ namespace Tinybit {
         if((apr_x<20||apr_x>-20)&&(apr_y<20||apr_y>-20))
         {
             Car_stop();
-            return 
+            return;
         }
 
         //PID处理
