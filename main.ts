@@ -630,22 +630,22 @@ namespace Tinybit {
 
         
         // //不超过最大速度
-        if(speed_L >65)
+        if(speed_L >55)
         {
-            speed_L = 65
+            speed_L = 55
         }
-        else if(speed_L < -65)
+        else if(speed_L < -55)
         {
-            speed_L = -65
+            speed_L = -55
         }
 
-        if(speed_R >65)
+        if(speed_R >55)
         {
-            speed_R = 65
+            speed_R = 55
         }
-        else if(speed_R < -65)
+        else if(speed_R < -55)
         {
-            speed_R = -65
+            speed_R = -55
         }
 
         //PID处理后再传速度
