@@ -649,7 +649,17 @@ namespace Tinybit {
         }
 
         //PID处理后再传速度
-        car_sport(speed_L,speed_R);
+        if((speed_L<0&&speed_R>0)||speed_L>0&&speed_R<0)
+        {
+            car_sport(speed_L,speed_R);
+            basic.pause(10);//动10ms
+            Car_stop();
+        }
+        else
+        {
+            car_sport(speed_L,speed_R);
+        }
+        
     }
 
 
