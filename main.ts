@@ -592,6 +592,7 @@ namespace Tinybit {
         if(x==0 || y==0)//不可能出现这个值
         {
             //frist_flag = 0;
+            Car_stop();
             return;
         }
 
