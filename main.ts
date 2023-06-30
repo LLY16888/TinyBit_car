@@ -652,7 +652,7 @@ namespace Tinybit {
         if((speed_L<0&&speed_R>0)||speed_L>0&&speed_R<0)
         {
             car_sport(speed_L,speed_R);
-            basic.pause(50);//动10ms
+            basic.pause(200);//动xxms
             Car_stop();
         }
         else
