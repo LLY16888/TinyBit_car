@@ -599,9 +599,10 @@ namespace Tinybit {
         apr_x =80 - x; //80:机器码X中心点
         apr_y =y - 60; //60：机器码Y中心点
 
-        if((apr_x<20||apr_x>-20)&&(apr_y<20||apr_y>-20))
+        if((apr_x<10||apr_x>-10)&&(apr_y<10||apr_y>-10))
         {
             Car_stop();
+            basic.showNumber(apr_x);
             return;
         }
 
