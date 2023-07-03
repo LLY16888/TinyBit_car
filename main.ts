@@ -563,13 +563,13 @@ namespace Tinybit {
     }
 
     
-    //% blockId=Tinybit_follow_apriltags block="Follow Apriltags|k210_x %x|k210_y %y|k210_w %w|k210_h %h|k210_speed %speed_min|zhong %zhong"
+    //% blockId=Tinybit_follow_apriltags block="Follow Apriltags|k210_x %x|k210_y %y|k210_w %w|k210_h %h|k210_speed %speed_min|zhong %zhong|ingro %speed_ingro"
     //% color="#006400"
     //% weight=87
     //% blockGap=10
     //% x.min=0 x.max=320 y.min=0 y.max=240 w.min=0 w.max=320 h.min=0 h.max=240 speed_min.min = 10 speed_min.max = 70 zhong.min = 0 zhong.min = 40
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function follow_apriltags(x:number,y:number,w:number,h:number,speed_min:number,zhong:number)
+    export function follow_apriltags(x:number,y:number,w:number,h:number,speed_min:number,zhong:number,speed_ingro:number)
     {
         let speed_L = 0;
         let speed_R = 0;
@@ -579,14 +579,14 @@ namespace Tinybit {
         let apr_y = 0;
         
         //初始化PID,***后面在封成库里面，现在PID先开放，调试用***
-        if(PID_state < 2)
+        if(PID_state < 2)//用户不初始化PID
         {
-            if(PID_state == 0)//用户不初始化PID
+            if(PID_state == 0)
             {
                 k210_PID_init_X(0, 30, 0, 0);//0：左右偏的方向为0，即没误差
                 k210_PID_init_Y(0, 50, 0, 0);
             }
-            else if (PID_state == 1)//用户只初始化一个PID方向
+            else if (PID_state == 1)//只初始化一个PID方向
             {
                 if(PID_state_x == 0)//只初始化y方向
                 {
@@ -638,20 +638,20 @@ namespace Tinybit {
         speed_R = res_y - 0 - res_x;
 
         // 防死区
-        if(speed_L >5 && speed_L <speed_min)
+        if(speed_L >speed_ingro && speed_L <speed_min)
         {
             speed_L = speed_min;
         }
-        else if(speed_L <-5 && speed_L > -speed_min)
+        else if(speed_L <-speed_ingro && speed_L > -speed_min)
         {
             speed_L = -speed_min;
         }
         
-        if(speed_R >5 && speed_R <speed_min)
+        if(speed_R >speed_ingro && speed_R <speed_min)
         {
             speed_R = speed_min;
         }
-        else if(speed_R <-5 && speed_R > -speed_min)
+        else if(speed_R <-speed_ingro && speed_R > -speed_min)
         {
             speed_R = -speed_min;
         }
