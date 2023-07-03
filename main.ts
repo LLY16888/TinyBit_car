@@ -740,20 +740,20 @@ namespace Tinybit {
         speed_R = res_y - 0 - res_x;
 
         //防死区
-        if(speed_L >0 && speed_L <speed_min)
+        if(speed_L >8 && speed_L <speed_min)
         {
             speed_L = speed_min;
         }
-        else if(speed_L <0 && speed_L > -speed_min)
+        else if(speed_L <-8 && speed_L > -speed_min)
         {
             speed_L = -speed_min;
         }
         
-        if(speed_R >0 && speed_R <speed_min)
+        if(speed_R >8 && speed_R <speed_min)
         {
             speed_R = speed_min;
         }
-        else if(speed_R <0 && speed_R > -speed_min)
+        else if(speed_R <-8 && speed_R > -speed_min)
         {
             speed_R = -speed_min;
         }
