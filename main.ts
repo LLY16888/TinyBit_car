@@ -659,13 +659,13 @@ namespace Tinybit {
     }
 
 
-    //% blockId=Tinybit_follow_color block="Follow Color|k210_x %x|k210_y %y|k210_w %w|k210_h %h|k210_speed %speed_min"
+    //% blockId=Tinybit_follow_color block="Follow Color|k210_x %x|k210_y %y|k210_w %w|k210_h %h|k210_speed %speed_min|middle %zhong"
     //% color="#D15FEE"
     //% weight=87
     //% blockGap=10
-    //% x.min=0 x.max=320 y.min=0 y.max=240 w.min=0 w.max=320 h.min=0 h.max=240 speed_min.min=10 speed_min.min=70
+    //% x.min=0 x.max=320 y.min=0 y.max=240 w.min=0 w.max=320 h.min=0 h.max=240 speed_min.min=10 speed_max.max=70 zhong.min=10 zhong.min=70
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function follow_color(x:number,y:number,w:number,h:number,speed_min:number)
+    export function follow_color(x:number,y:number,w:number,h:number,speed_min:number,zhong:number)
     {
         let speed_L = 0;
         let speed_R = 0;
@@ -692,6 +692,12 @@ namespace Tinybit {
 
         apr_x =160 - x; 
         apr_y =y - 120; 
+
+        if((apr_x<zhong&&apr_x>-zhong)&&(apr_y<zhong&&apr_y>-zhong))
+        {
+            Car_stop();
+            return;
+        }
 
         //PID处理
         res_x = k210_PID_deal(apr_x,0);//进行x的方向PID处理
@@ -733,22 +739,22 @@ namespace Tinybit {
 
 
         //不超过最大速度
-        if(speed_L >100)
+        if(speed_L >65)
         {
-            speed_L = 100
+            speed_L = 65
         }
-        else if(speed_L < -100)
+        else if(speed_L < -65)
         {
-            speed_L = -100
+            speed_L = -65
         }
 
-        if(speed_R >100)
+        if(speed_R >65)
         {
-            speed_R = 100
+            speed_R = 65
         }
-        else if(speed_R < -100)
+        else if(speed_R < -65)
         {
-            speed_R = -100
+            speed_R = -65
         }
 
         //PID处理后再传速度
