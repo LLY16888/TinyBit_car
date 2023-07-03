@@ -423,6 +423,8 @@ namespace Tinybit {
     }
 
     let PID_state = 0;//状态 1：初始化PID
+    let PID_state_x = 0;//x方向 状态 0:没初始化
+    let PID_state_y = 0;//y方向
 
     //X方向的
     let PID_P_X = 0;
@@ -487,7 +489,8 @@ namespace Tinybit {
         PID_I_X = I/100;
         PID_D_X = D/100;
         PID_target_X = target;
-        PID_state = 1;
+        PID_state = PID_state + 1;
+        PID_state_x = 1;
     }
 
     //% blockId=Y_PID block="Y_PID|target %target|Y_P %P|Y_I %I|Y_D %D"
@@ -501,7 +504,8 @@ namespace Tinybit {
         PID_I_Y = I/100;
         PID_D_Y = D/100;
         PID_target_Y = target;
-        PID_state = 2;
+        PID_state = PID_state + 1;
+        PID_state_y = 1;
     }
 
     //增量式PID
@@ -575,22 +579,27 @@ namespace Tinybit {
         let apr_y = 0;
         
         //初始化PID,***后面在封成库里面，现在PID先开放，调试用***
-        if(PID_state < 3)
+        if(PID_state < 2)
         {
             if(PID_state == 0)//用户不初始化PID
             {
                 k210_PID_init_X(0, 30, 0, 0);//0：左右偏的方向为0，即没误差
                 k210_PID_init_Y(0, 50, 0, 0);
             }
-            else if (PID_state == 1)//用户不初始化PID-y方向，只初始化x方向
+            else if (PID_state == 1)//用户只初始化一个PID方向
             {
-                k210_PID_init_Y(0, 50, 0, 0);
+                if(PID_state_x == 0)//只初始化y方向
+                {
+                    k210_PID_init_X(0, 30, 0, 0);//0：左右偏的方向为0，即没误差
+                }
+                else if(PID_state_y == 0)//只初始化x方向
+                {
+                    k210_PID_init_Y(0, 50, 0, 0);
+                }
+                
             }
-            else if (PID_state == 2)//用户不初始化PID-x方向，只初始化y方向
-            {
-                k210_PID_init_X(0, 30, 0, 0);//0：左右偏的方向为0，即没误差
-            }
-            PID_state = 3;
+
+            PID_state = 2;
            
         }
 
