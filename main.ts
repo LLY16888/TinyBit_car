@@ -660,20 +660,20 @@ namespace Tinybit {
         // //不超过最大速度
         if(speed_L >spmax)
         {
-            speed_L = spmax
+            speed_L = spmax;
         }
         else if(speed_L < -spmax)
         {
-            speed_L = -spmax
+            speed_L = -spmax;
         }
 
         if(speed_R >spmax)
         {
-            speed_R = spmax
+            speed_R = spmax;
         }
         else if(speed_R < -spmax)
         {
-            speed_R = -spmax
+            speed_R = -spmax;
         }
 
         //PID处理后再传速度
@@ -682,13 +682,13 @@ namespace Tinybit {
     }
 
 
-    //% blockId=Tinybit_follow_color block="Follow Color|k210_x %x|k210_y %y|k210_w %w|k210_h %h|k210_speed %speed_min|middle %zhong"
+    //% blockId=Tinybit_follow_color block="Follow Color|k210_x %x|k210_y %y|k210_w %w|k210_h %h|k210_speed %speed_min|middle %zhong|ingro %speed_ingro|spmax %spmax"
     //% color="#D15FEE"
     //% weight=87
     //% blockGap=10
     //% x.min=0 x.max=320 y.min=0 y.max=240 w.min=0 w.max=320 h.min=0 h.max=240 speed_min.min=10 speed_max.max=70 zhong.min=10 zhong.min=70
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function follow_color(x:number,y:number,w:number,h:number,speed_min:number,zhong:number)
+    export function follow_color(x:number,y:number,w:number,h:number,speed_min:number,zhong:number,speed_ingro:number,spmax:number)
     {
         let speed_L = 0;
         let speed_R = 0;
@@ -740,55 +740,55 @@ namespace Tinybit {
         speed_R = res_y - 0 - res_x;
 
         //防死区
-        if(speed_L >8 && speed_L <speed_min)
+        if(speed_L >speed_ingro && speed_L <speed_min)
         {
             speed_L = speed_min;
         }
-        else if(speed_L <-8 && speed_L > -speed_min)
+        else if(speed_L <-speed_ingro && speed_L > -speed_min)
         {
             speed_L = -speed_min;
         }
         
-        if(speed_R >8 && speed_R <speed_min)
+        if(speed_R >speed_ingro && speed_R <speed_min)
         {
             speed_R = speed_min;
         }
-        else if(speed_R <-8 && speed_R > -speed_min)
+        else if(speed_R <-speed_ingro && speed_R > -speed_min)
         {
             speed_R = -speed_min;
         }
 
 
         //不超过最大速度
-        if(speed_L >65)
+        if(speed_L >spmax)
         {
-            speed_L = 65
+            speed_L = spmax;
         }
-        else if(speed_L < -65)
+        else if(speed_L < -spmax)
         {
-            speed_L = -65
+            speed_L = -spmax;
         }
 
-        if(speed_R >65)
+        if(speed_R >spmax)
         {
-            speed_R = 65
+            speed_R = spmax;
         }
-        else if(speed_R < -65)
+        else if(speed_R < -spmax)
         {
-            speed_R = -65
+            speed_R = -spmax;
         }
 
         //PID处理后再传速度
         car_sport(speed_L,speed_R);
     }
 
-    //% blockId=Tinybit_color_line block="Color Line|speedLine %speedLine|k210_x %x|k210_y %y|k210_w %w|k210_h %h"
+    //% blockId=Tinybit_color_line block="Color Line|speedLine %speedLine|k210_x %x|k210_y %y|k210_w %w|k210_h %h|spmax %spmax"
     //% color="#EE7AE9"
     //% weight=87
     //% blockGap=10
     //% speedLine.min=10 speedLine.max=200 x.min=0 x.max=320 y.min=0 y.max=240 w.min=0 w.max=320 h.min=0 h.max=240
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function color_line(speedLine:number,x:number,y:number,w:number,h:number)
+    export function color_line(speedLine:number,x:number,y:number,w:number,h:number,spmax:number)
     {
         let speed_L = 0;
         let speed_R = 0;
@@ -825,22 +825,22 @@ namespace Tinybit {
 
 
         //不超过最大速度
-        if(speed_L >200)
+        if(speed_L >spmax)
         {
-            speed_L = 200
+            speed_L = spmax;
         }
-        else if(speed_L < -200)
+        else if(speed_L < -spmax)
         {
-            speed_L = -200
+            speed_L = -spmax;
         }
 
-        if(speed_R >200)
+        if(speed_R >spmax)
         {
-            speed_R = 200
+            speed_R = spmax;
         }
-        else if(speed_R < -200)
+        else if(speed_R < -spmax)
         {
-            speed_R = -200
+            speed_R = -spmax;
         }
 
         //PID处理后再传速度
