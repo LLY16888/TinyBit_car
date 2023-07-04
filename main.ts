@@ -563,13 +563,13 @@ namespace Tinybit {
     }
 
     
-    //% blockId=Tinybit_follow_apriltags block="Follow Apriltags|k210_x %x|k210_y %y|k210_w %w|k210_h %h|k210_speed %speed_min|zhong %zhong|ingro %speed_ingro"
+    //% blockId=Tinybit_follow_apriltags block="Follow Apriltags|k210_x %x|k210_y %y|k210_w %w|k210_h %h|k210_speed %speed_min|zhong %zhong|ingro %speed_ingro|spmax %spmax"
     //% color="#006400"
     //% weight=87
     //% blockGap=10
     //% x.min=0 x.max=320 y.min=0 y.max=240 w.min=0 w.max=320 h.min=0 h.max=240 speed_min.min = 10 speed_min.max = 70 zhong.min = 0 zhong.min = 40
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function follow_apriltags(x:number,y:number,w:number,h:number,speed_min:number,zhong:number,speed_ingro:number)
+    export function follow_apriltags(x:number,y:number,w:number,h:number,speed_min:number,zhong:number,speed_ingro:number,spmax:number)
     {
         let speed_L = 0;
         let speed_R = 0;
@@ -579,7 +579,7 @@ namespace Tinybit {
         let apr_y = 0;
         
         //初始化PID,***后面在封成库里面，现在PID先开放，调试用***
-        if(PID_state < 2)//用户不初始化PID
+        if(PID_state < 2)//积木块不初始化PID
         {
             if(PID_state == 0)
             {
@@ -658,22 +658,22 @@ namespace Tinybit {
 
         
         // //不超过最大速度
-        if(speed_L >65)
+        if(speed_L >spmax)
         {
-            speed_L = 65
+            speed_L = spmax
         }
-        else if(speed_L < -65)
+        else if(speed_L < -spmax)
         {
-            speed_L = -65
+            speed_L = -spmax
         }
 
-        if(speed_R >65)
+        if(speed_R >spmax)
         {
-            speed_R = 65
+            speed_R = spmax
         }
-        else if(speed_R < -65)
+        else if(speed_R < -spmax)
         {
-            speed_R = -65
+            speed_R = -spmax
         }
 
         //PID处理后再传速度
